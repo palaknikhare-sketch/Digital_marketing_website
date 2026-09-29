@@ -52,7 +52,7 @@ export function WishlistDrawer({ open, onClose, onView }: WishlistDrawerProps) {
               {items.map((product) => (
                 <div key={product.id} className="flex gap-4 rounded-2xl bg-cream-50 p-3">
                   <img
-                    src={product.gallery[product.defaultColor].front}
+                    src={product.gallery[product.defaultColor]?.front ?? product.featuredImage}
                     alt={product.name}
                     className="h-20 w-20 shrink-0 rounded-xl object-cover"
                   />

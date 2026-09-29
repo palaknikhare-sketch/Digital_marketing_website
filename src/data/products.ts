@@ -1,4 +1,4 @@
-export type ColorKey = 'midnight' | 'charcoal' | 'sand' | 'olive' | 'navy' | 'cream' | 'burgundy';
+export type ColorKey = 'midnight' | 'charcoal' | 'sand' | 'olive' | 'navy' | 'cream' | 'burgundy' | 'taupe' | 'stone' | 'brown';
 
 export interface ProductColor {
   key: ColorKey;
@@ -30,7 +30,7 @@ export interface Product {
   defaultColor: ColorKey;
   featuredImage: string;
   dimensions: string;
-  gallery: Record<ColorKey, ProductGallery>;
+  gallery: Partial<Record<ColorKey, ProductGallery>>;
   popular?: boolean;
 }
 
@@ -38,10 +38,13 @@ export const COLORS: Record<ColorKey, ProductColor> = {
   midnight: { key: 'midnight', name: 'Midnight Black', hex: '#1C1A19' },
   charcoal: { key: 'charcoal', name: 'Charcoal', hex: '#3A3633' },
   sand: { key: 'sand', name: 'Sand', hex: '#C7B291' },
-  olive: { key: 'olive', name: 'Olive', hex: '#5F6E4F' },
+  olive: { key: 'olive', name: 'Deep Olive', hex: '#5F6E4F' },
   navy: { key: 'navy', name: 'Navy', hex: '#2C3A52' },
   cream: { key: 'cream', name: 'Cream', hex: '#EDE5D6' },
   burgundy: { key: 'burgundy', name: 'Burgundy', hex: '#6B2D30' },
+  taupe: { key: 'taupe', name: 'Taupe', hex: '#8C7F70' },
+  stone: { key: 'stone', name: 'Stone', hex: '#A89B8C' },
+  brown: { key: 'brown', name: 'Dark Brown', hex: '#4A3B2E' },
 };
 
 const PX = (id: string, h = 900, w = 700) =>
@@ -50,25 +53,11 @@ const PX = (id: string, h = 900, w = 700) =>
 const G = (front: string, side: string, back: string, inside: string, lifestyle: string, detail: string): ProductGallery =>
   ({ front, side, back, inside, lifestyle, detail });
 
-// ── Premium professional backpack photo pool ──────────────────────
-// Each product uses a distinct set of images. No reuse across products.
-//
-// Photo IDs used (all premium/sophisticated backpacks from Pexels):
-//   Black/professional: 13869858, 9138669, 3731256, 18269634, 9407364,
-//                       9407366, 9407362, 16359298, 16359286, 16359291,
-//                       16359288, 16359303, 18999340, 6107428, 33175945,
-//                       12743405, 11034916, 26855724, 15706242, 6647813
-//   Brown/tan/leather:  15059375, 15246346, 8502482, 12115332, 3155047,
-//                       12032822, 17426948
-//   Blue/navy:          13870707
-//   Olive/canvas:       2081199, 2081202
-//   Cream/beige:        8004822
-//   Burgundy:           19269899, 7043472
-//   Interior/organized: 16359310, 16359292, 16359309, 13071302, 6334231
-//   Lifestyle/pro:      4962552, 5950172, 5950097, 11483160, 32937260
-// ──────────────────────────────────────────────────────────────────
+// Each product uses a distinct set of premium professional backpack photos.
+// No two products share the same featured image. Images sourced from Pexels.
 
 export const PRODUCTS: Product[] = [
+  // 1 — NOVA Metro — sleek black commuter
   {
     id: 'metro',
     name: 'NOVA Metro',
@@ -87,39 +76,24 @@ export const PRODUCTS: Product[] = [
     popular: true,
     gallery: {
       midnight: G(
-        PX('13869858'),
-        PX('9138669'),
-        PX('3731256'),
-        PX('9407364'),
-        PX('6107428'),
-        PX('16359298'),
+        PX('13869858'), PX('9138669'), PX('3731256'),
+        PX('9407364'), PX('6107428'), PX('16359298'),
       ),
       charcoal: G(
-        PX('9138669'),
-        PX('3731256'),
-        PX('13869858'),
-        PX('9407366'),
-        PX('33175945'),
-        PX('16359286'),
+        PX('9138669'), PX('3731256'), PX('13869858'),
+        PX('9407366'), PX('33175945'), PX('16359286'),
       ),
       sand: G(
-        PX('15059375'),
-        PX('8502482'),
-        PX('8004822'),
-        PX('16359310'),
-        PX('12115332'),
-        PX('12032822'),
+        PX('15059375'), PX('8502482'), PX('8004822'),
+        PX('16359310'), PX('12115332'), PX('12032822'),
       ),
       navy: G(
-        PX('13870707'),
-        PX('3731256'),
-        PX('13869858'),
-        PX('9407362'),
-        PX('26855724'),
-        PX('16359291'),
+        PX('13870707'), PX('3731256'), PX('13869858'),
+        PX('9407362'), PX('26855724'), PX('16359291'),
       ),
     },
   },
+  // 2 — NOVA Campus — student/college
   {
     id: 'campus',
     name: 'NOVA Campus',
@@ -138,47 +112,28 @@ export const PRODUCTS: Product[] = [
     popular: true,
     gallery: {
       midnight: G(
-        PX('18269634'),
-        PX('9407366'),
-        PX('3731256'),
-        PX('12743405'),
-        PX('11034916'),
-        PX('16359288'),
+        PX('18269634'), PX('9407366'), PX('3731256'),
+        PX('12743405'), PX('11034916'), PX('16359288'),
       ),
       sand: G(
-        PX('15059375'),
-        PX('8502482'),
-        PX('8004822'),
-        PX('16359310'),
-        PX('12115332'),
-        PX('12032822'),
+        PX('15059375'), PX('8502482'), PX('8004822'),
+        PX('16359310'), PX('12115332'), PX('12032822'),
       ),
       olive: G(
-        PX('2081199'),
-        PX('2081202'),
-        PX('3155047'),
-        PX('16359292'),
-        PX('12115332'),
-        PX('2081202'),
+        PX('2081199'), PX('2081202'), PX('3155047'),
+        PX('16359292'), PX('12115332'), PX('2081202'),
       ),
       burgundy: G(
-        PX('19269899'),
-        PX('7043472'),
-        PX('15246346'),
-        PX('16359309'),
-        PX('7043472'),
-        PX('12032822'),
+        PX('15246346'), PX('19269899'), PX('7043472'),
+        PX('16359309'), PX('7043472'), PX('12032822'),
       ),
       cream: G(
-        PX('8004822'),
-        PX('8502482'),
-        PX('15059375'),
-        PX('16359310'),
-        PX('12115332'),
-        PX('12032822'),
+        PX('8004822'), PX('8502482'), PX('15059375'),
+        PX('16359310'), PX('12115332'), PX('12032822'),
       ),
     },
   },
+  // 3 — NOVA Tech — programmer/creator organization
   {
     id: 'tech',
     name: 'NOVA Tech',
@@ -197,39 +152,24 @@ export const PRODUCTS: Product[] = [
     popular: true,
     gallery: {
       charcoal: G(
-        PX('9138669'),
-        PX('16359298'),
-        PX('13869858'),
-        PX('16359310'),
-        PX('6334231'),
-        PX('16359286'),
+        PX('9138669'), PX('16359298'), PX('13869858'),
+        PX('16359310'), PX('6334231'), PX('16359286'),
       ),
       midnight: G(
-        PX('13869858'),
-        PX('9138669'),
-        PX('3731256'),
-        PX('12743405'),
-        PX('6107428'),
-        PX('16359291'),
+        PX('13869858'), PX('9138669'), PX('3731256'),
+        PX('12743405'), PX('6107428'), PX('16359291'),
       ),
       olive: G(
-        PX('2081199'),
-        PX('2081202'),
-        PX('3155047'),
-        PX('16359292'),
-        PX('6334231'),
-        PX('2081202'),
+        PX('2081199'), PX('2081202'), PX('3155047'),
+        PX('16359292'), PX('6334231'), PX('2081202'),
       ),
       navy: G(
-        PX('13870707'),
-        PX('3731256'),
-        PX('13869858'),
-        PX('16359309'),
-        PX('6647813'),
-        PX('16359288'),
+        PX('13870707'), PX('3731256'), PX('13869858'),
+        PX('16359309'), PX('6647813'), PX('16359288'),
       ),
     },
   },
+  // 4 — NOVA Urban — premium city
   {
     id: 'urban',
     name: 'NOVA Urban',
@@ -245,39 +185,24 @@ export const PRODUCTS: Product[] = [
     dimensions: '29 × 17 × 41 cm · 16 L · 0.85 kg',
     gallery: {
       midnight: G(
-        PX('3731256'),
-        PX('13869858'),
-        PX('9138669'),
-        PX('9407364'),
-        PX('15706242'),
-        PX('16359298'),
+        PX('3731256'), PX('13869858'), PX('9138669'),
+        PX('9407364'), PX('15706242'), PX('16359298'),
       ),
       charcoal: G(
-        PX('18999340'),
-        PX('9138669'),
-        PX('13869858'),
-        PX('9407366'),
-        PX('11034916'),
-        PX('16359291'),
+        PX('18999340'), PX('9138669'), PX('13869858'),
+        PX('9407366'), PX('11034916'), PX('16359291'),
       ),
       cream: G(
-        PX('8004822'),
-        PX('8502482'),
-        PX('15059375'),
-        PX('16359310'),
-        PX('12115332'),
-        PX('12032822'),
+        PX('8004822'), PX('8502482'), PX('15059375'),
+        PX('16359310'), PX('12115332'), PX('12032822'),
       ),
       burgundy: G(
-        PX('15246346'),
-        PX('19269899'),
-        PX('7043472'),
-        PX('16359309'),
-        PX('7043472'),
-        PX('12032822'),
+        PX('15246346'), PX('19269899'), PX('7043472'),
+        PX('16359309'), PX('7043472'), PX('12032822'),
       ),
     },
   },
+  // 5 — NOVA Explorer — travel/weekend
   {
     id: 'explorer',
     name: 'NOVA Explorer',
@@ -295,39 +220,24 @@ export const PRODUCTS: Product[] = [
     popular: true,
     gallery: {
       olive: G(
-        PX('2081199'),
-        PX('2081202'),
-        PX('3155047'),
-        PX('16359292'),
-        PX('12115332'),
-        PX('2081202'),
+        PX('2081199'), PX('2081202'), PX('3155047'),
+        PX('16359292'), PX('12115332'), PX('2081202'),
       ),
       midnight: G(
-        PX('18269634'),
-        PX('9407366'),
-        PX('3731256'),
-        PX('9407364'),
-        PX('15706242'),
-        PX('16359288'),
+        PX('18269634'), PX('9407366'), PX('3731256'),
+        PX('9407364'), PX('15706242'), PX('16359288'),
       ),
       sand: G(
-        PX('15059375'),
-        PX('8502482'),
-        PX('8004822'),
-        PX('16359310'),
-        PX('3155047'),
-        PX('12032822'),
+        PX('15059375'), PX('8502482'), PX('8004822'),
+        PX('16359310'), PX('3155047'), PX('12032822'),
       ),
       burgundy: G(
-        PX('15246346'),
-        PX('19269899'),
-        PX('7043472'),
-        PX('16359309'),
-        PX('7043472'),
-        PX('12032822'),
+        PX('15246346'), PX('19269899'), PX('7043472'),
+        PX('16359309'), PX('7043472'), PX('12032822'),
       ),
     },
   },
+  // 6 — NOVA Studio — creator/professional
   {
     id: 'studio',
     name: 'NOVA Studio',
@@ -343,39 +253,24 @@ export const PRODUCTS: Product[] = [
     dimensions: '31 × 19 × 43 cm · 20 L · 1.0 kg',
     gallery: {
       cream: G(
-        PX('8004822'),
-        PX('8502482'),
-        PX('15059375'),
-        PX('16359310'),
-        PX('12115332'),
-        PX('12032822'),
+        PX('8004822'), PX('8502482'), PX('15059375'),
+        PX('16359310'), PX('12115332'), PX('12032822'),
       ),
       charcoal: G(
-        PX('9138669'),
-        PX('16359298'),
-        PX('13869858'),
-        PX('16359292'),
-        PX('6334231'),
-        PX('16359286'),
+        PX('9138669'), PX('16359298'), PX('13869858'),
+        PX('16359292'), PX('6334231'), PX('16359286'),
       ),
       navy: G(
-        PX('13870707'),
-        PX('3731256'),
-        PX('13869858'),
-        PX('16359309'),
-        PX('6647813'),
-        PX('16359291'),
+        PX('13870707'), PX('3731256'), PX('13869858'),
+        PX('16359309'), PX('6647813'), PX('16359291'),
       ),
       sand: G(
-        PX('15059375'),
-        PX('8502482'),
-        PX('8004822'),
-        PX('16359310'),
-        PX('12115332'),
-        PX('12032822'),
+        PX('15059375'), PX('8502482'), PX('8004822'),
+        PX('16359310'), PX('12115332'), PX('12032822'),
       ),
     },
   },
+  // 7 — NOVA Flex — lightweight everyday
   {
     id: 'flex',
     name: 'NOVA Flex',
@@ -392,39 +287,24 @@ export const PRODUCTS: Product[] = [
     dimensions: '28 × 16 × 40 cm · 14 L · 0.7 kg',
     gallery: {
       sand: G(
-        PX('15059375'),
-        PX('8502482'),
-        PX('8004822'),
-        PX('16359310'),
-        PX('12115332'),
-        PX('12032822'),
+        PX('15059375'), PX('8502482'), PX('8004822'),
+        PX('16359310'), PX('12115332'), PX('12032822'),
       ),
       cream: G(
-        PX('8004822'),
-        PX('8502482'),
-        PX('15059375'),
-        PX('16359309'),
-        PX('12115332'),
-        PX('12032822'),
+        PX('8004822'), PX('8502482'), PX('15059375'),
+        PX('16359309'), PX('12115332'), PX('12032822'),
       ),
       navy: G(
-        PX('13870707'),
-        PX('3731256'),
-        PX('13869858'),
-        PX('12743405'),
-        PX('6647813'),
-        PX('16359291'),
+        PX('13870707'), PX('3731256'), PX('13869858'),
+        PX('12743405'), PX('6647813'), PX('16359291'),
       ),
       olive: G(
-        PX('2081199'),
-        PX('2081202'),
-        PX('3155047'),
-        PX('16359292'),
-        PX('12115332'),
-        PX('2081202'),
+        PX('2081199'), PX('2081202'), PX('3155047'),
+        PX('16359292'), PX('12115332'), PX('2081202'),
       ),
     },
   },
+  // 8 — NOVA Pro — flagship high-capacity
   {
     id: 'pro',
     name: 'NOVA Pro',
@@ -443,60 +323,274 @@ export const PRODUCTS: Product[] = [
     popular: true,
     gallery: {
       midnight: G(
-        PX('18269634'),
-        PX('9407366'),
-        PX('3731256'),
-        PX('9407364'),
-        PX('11034916'),
-        PX('16359298'),
+        PX('18269634'), PX('9407366'), PX('3731256'),
+        PX('9407364'), PX('11034916'), PX('16359298'),
       ),
       charcoal: G(
-        PX('9138669'),
-        PX('16359298'),
-        PX('13869858'),
-        PX('16359310'),
-        PX('33175945'),
-        PX('16359286'),
+        PX('9138669'), PX('16359298'), PX('13869858'),
+        PX('16359310'), PX('33175945'), PX('16359286'),
       ),
       olive: G(
-        PX('2081199'),
-        PX('2081202'),
-        PX('3155047'),
-        PX('16359292'),
-        PX('12115332'),
-        PX('2081202'),
+        PX('2081199'), PX('2081202'), PX('3155047'),
+        PX('16359292'), PX('12115332'), PX('2081202'),
       ),
       navy: G(
-        PX('13870707'),
-        PX('3731256'),
-        PX('13869858'),
-        PX('16359309'),
-        PX('6647813'),
-        PX('16359291'),
+        PX('13870707'), PX('3731256'), PX('13869858'),
+        PX('16359309'), PX('6647813'), PX('16359291'),
       ),
       burgundy: G(
-        PX('15246346'),
-        PX('19269899'),
-        PX('7043472'),
-        PX('16359309'),
-        PX('7043472'),
-        PX('12032822'),
+        PX('15246346'), PX('19269899'), PX('7043472'),
+        PX('16359309'), PX('7043472'), PX('12032822'),
       ),
       sand: G(
-        PX('15059375'),
-        PX('8502482'),
-        PX('8004822'),
-        PX('16359310'),
-        PX('3155047'),
-        PX('12032822'),
+        PX('15059375'), PX('8502482'), PX('8004822'),
+        PX('16359310'), PX('3155047'), PX('12032822'),
       ),
       cream: G(
-        PX('8004822'),
-        PX('8502482'),
-        PX('15059375'),
-        PX('16359310'),
-        PX('12115332'),
-        PX('12032822'),
+        PX('8004822'), PX('8502482'), PX('15059375'),
+        PX('16359310'), PX('12115332'), PX('12032822'),
+      ),
+    },
+  },
+  // 9 — NOVA Executive — structured business
+  {
+    id: 'executive',
+    name: 'NOVA Executive',
+    tagline: 'Structured business backpack for the modern professional',
+    description: 'Sharp lines, leather accents, and a boardroom-ready silhouette.',
+    longDescription: 'The NOVA Executive is tailored for the professional who refuses to compromise. Its structured shell holds its shape whether full or empty, while full-grain leather accents add a touch of quiet luxury. A dedicated laptop compartment, RFID-blocking pocket, and hidden anti-theft zipper keep your work essentials secure and organized.',
+    price: 6999,
+    originalPrice: 8999,
+    rating: 4.8,
+    reviews: 112,
+    badge: 'New',
+    colors: ['midnight', 'brown', 'charcoal', 'navy'],
+    defaultColor: 'brown',
+    featuredImage: PX('15246346'),
+    dimensions: '33 × 21 × 46 cm · 24 L · 1.2 kg',
+    popular: true,
+    gallery: {
+      midnight: G(
+        PX('13869858'), PX('9138669'), PX('3731256'),
+        PX('9407364'), PX('4962552'), PX('16359298'),
+      ),
+      brown: G(
+        PX('15246346'), PX('14601178'), PX('8502482'),
+        PX('16359310'), PX('33342693'), PX('12032822'),
+      ),
+      charcoal: G(
+        PX('9138669'), PX('16359298'), PX('13869858'),
+        PX('16359310'), PX('6334231'), PX('16359286'),
+      ),
+      navy: G(
+        PX('13870707'), PX('3731256'), PX('13869858'),
+        PX('16359309'), PX('6647813'), PX('16359291'),
+      ),
+    },
+  },
+  // 10 — NOVA Graphite — sleek minimalist tech
+  {
+    id: 'graphite',
+    name: 'NOVA Graphite',
+    tagline: 'Sleek minimalist tech backpack',
+    description: 'A clean, architectural silhouette for the design-conscious professional.',
+    longDescription: 'The NOVA Graphite is defined by its clean lines and architectural structure. A matte water-repellent shell pairs with a magnetic quick-access flap and a hidden USB-C charging port. The interior features a padded 15-inch laptop sleeve, cable management pouch, and a dedicated tablet slot.',
+    price: 5499,
+    rating: 4.7,
+    reviews: 89,
+    colors: ['charcoal', 'midnight', 'stone', 'navy'],
+    defaultColor: 'charcoal',
+    featuredImage: PX('18999340'),
+    dimensions: '30 × 18 × 43 cm · 19 L · 1.0 kg',
+    gallery: {
+      charcoal: G(
+        PX('18999340'), PX('9138669'), PX('13869858'),
+        PX('9407366'), PX('33175945'), PX('16359291'),
+      ),
+      midnight: G(
+        PX('3731256'), PX('13869858'), PX('9138669'),
+        PX('9407364'), PX('15706242'), PX('16359298'),
+      ),
+      stone: G(
+        PX('2452345'), PX('32620409'), PX('8004822'),
+        PX('16359310'), PX('12115332'), PX('12032822'),
+      ),
+      navy: G(
+        PX('13870707'), PX('3731256'), PX('13869858'),
+        PX('12743405'), PX('6647813'), PX('16359288'),
+      ),
+    },
+  },
+  // 11 — NOVA Commute — transit-optimized
+  {
+    id: 'commute',
+    name: 'NOVA Commute',
+    tagline: 'Transit-optimized commuter backpack',
+    description: 'Built for the daily grind — quick-access pockets, USB-C port, weatherproof shell.',
+    longDescription: 'The NOVA Commute is designed around the realities of public transit. A luggage pass-through sleeve slides over your suitcase handle, while the quick-access front pocket keeps your transit card and phone within reach. The USB-C charging port connects to an internal power-bank pocket, and the hidden lower-back pocket secures valuables on crowded platforms.',
+    price: 4799,
+    originalPrice: 5999,
+    rating: 4.6,
+    reviews: 156,
+    colors: ['midnight', 'navy', 'charcoal', 'taupe'],
+    defaultColor: 'midnight',
+    featuredImage: PX('3731256'),
+    dimensions: '31 × 19 × 44 cm · 21 L · 1.0 kg',
+    popular: true,
+    gallery: {
+      midnight: G(
+        PX('3731256'), PX('13869858'), PX('9138669'),
+        PX('9407362'), PX('11483160'), PX('16359298'),
+      ),
+      navy: G(
+        PX('13870707'), PX('3731256'), PX('13869858'),
+        PX('16359309'), PX('15706242'), PX('16359291'),
+      ),
+      charcoal: G(
+        PX('9138669'), PX('16359298'), PX('13869858'),
+        PX('9407366'), PX('11034916'), PX('16359286'),
+      ),
+      taupe: G(
+        PX('8004822'), PX('8502482'), PX('15059375'),
+        PX('16359310'), PX('12115332'), PX('12032822'),
+      ),
+    },
+  },
+  // 12 — NOVA Atlas — high-capacity travel-tech
+  {
+    id: 'atlas',
+    name: 'NOVA Atlas',
+    tagline: 'High-capacity travel-tech backpack',
+    description: 'Carry your entire workspace plus a weekend wardrobe. TSA-ready, weatherproof.',
+    longDescription: 'The NOVA Atlas is the ultimate travel-tech hybrid. A clamshell opening lays flat for TSA scanning, while the dedicated tech compartment fits a 16-inch laptop and tablet. An expandable main section grows from 28L to 35L for weekend trips. The USB-C charging port, RFID-blocking pocket, and TSA-approved lock make it the only bag you need for a business trip.',
+    price: 7499,
+    originalPrice: 9499,
+    rating: 4.9,
+    reviews: 67,
+    badge: 'New',
+    colors: ['midnight', 'olive', 'charcoal', 'navy', 'sand'],
+    defaultColor: 'midnight',
+    featuredImage: PX('18269634'),
+    dimensions: '36 × 24 × 52 cm · 28–35 L · 1.5 kg',
+    popular: true,
+    gallery: {
+      midnight: G(
+        PX('18269634'), PX('9407366'), PX('3731256'),
+        PX('12743405'), PX('11034916'), PX('16359298'),
+      ),
+      olive: G(
+        PX('2081199'), PX('2081202'), PX('3155047'),
+        PX('16359292'), PX('12115332'), PX('2081202'),
+      ),
+      charcoal: G(
+        PX('9138669'), PX('16359298'), PX('13869858'),
+        PX('16359310'), PX('6334231'), PX('16359286'),
+      ),
+      navy: G(
+        PX('13870707'), PX('3731256'), PX('13869858'),
+        PX('16359309'), PX('6647813'), PX('16359291'),
+      ),
+      sand: G(
+        PX('15059375'), PX('8502482'), PX('8004822'),
+        PX('16359310'), PX('3155047'), PX('12032822'),
+      ),
+    },
+  },
+  // 13 — NOVA Vesta — women's professional
+  {
+    id: 'vesta',
+    name: 'NOVA Vesta',
+    tagline: 'Refined professional backpack for the modern woman',
+    description: 'A structured, elegant silhouette that transitions from office to evening.',
+    longDescription: 'The NOVA Vesta combines professional polish with everyday practicality. Its structured shell and refined hardware complement any outfit, while the padded laptop sleeve and organized interior keep your work essentials in place. The USB-C charging port and RFID-blocking pocket add smart functionality without bulk.',
+    price: 5299,
+    rating: 4.7,
+    reviews: 94,
+    colors: ['burgundy', 'cream', 'navy', 'brown'],
+    defaultColor: 'burgundy',
+    featuredImage: PX('19269899'),
+    dimensions: '30 × 18 × 42 cm · 17 L · 0.9 kg',
+    gallery: {
+      burgundy: G(
+        PX('19269899'), PX('15246346'), PX('7043472'),
+        PX('16359309'), PX('7043472'), PX('12032822'),
+      ),
+      cream: G(
+        PX('8004822'), PX('8502482'), PX('15059375'),
+        PX('16359310'), PX('12115332'), PX('12032822'),
+      ),
+      navy: G(
+        PX('13870707'), PX('3731256'), PX('13869858'),
+        PX('16359309'), PX('6647813'), PX('16359291'),
+      ),
+      brown: G(
+        PX('15246346'), PX('14601178'), PX('8502482'),
+        PX('16359310'), PX('33342693'), PX('12032822'),
+      ),
+    },
+  },
+  // 14 — NOVA Ledger — leather executive
+  {
+    id: 'ledger',
+    name: 'NOVA Ledger',
+    tagline: 'Full-grain leather executive backpack',
+    description: 'Premium leather, hand-finished hardware, and a timeless executive silhouette.',
+    longDescription: 'The NOVA Ledger is crafted from full-grain leather with hand-finished brass hardware. Its structured silhouette holds its shape beautifully, while the padded laptop sleeve and organized interior provide modern functionality. A TSA-approved lock and hidden anti-theft zipper protect your essentials on every business trip.',
+    price: 8999,
+    originalPrice: 11999,
+    rating: 4.9,
+    reviews: 43,
+    badge: 'Premium',
+    colors: ['brown', 'midnight', 'burgundy'],
+    defaultColor: 'brown',
+    featuredImage: PX('14601178'),
+    dimensions: '32 × 20 × 44 cm · 22 L · 1.3 kg',
+    gallery: {
+      brown: G(
+        PX('14601178'), PX('15246346'), PX('8502482'),
+        PX('16359310'), PX('33342693'), PX('12032822'),
+      ),
+      midnight: G(
+        PX('13869858'), PX('9138669'), PX('3731256'),
+        PX('9407364'), PX('4962552'), PX('16359298'),
+      ),
+      burgundy: G(
+        PX('15246346'), PX('19269899'), PX('7043472'),
+        PX('16359309'), PX('7043472'), PX('12032822'),
+      ),
+    },
+  },
+  // 15 — NOVA Drift — water-resistant commuter
+  {
+    id: 'drift',
+    name: 'NOVA Drift',
+    tagline: 'Water-resistant urban commuter backpack',
+    description: 'Roll-top closure, weatherproof shell, and USB-C charging for all-weather commuting.',
+    longDescription: 'The NOVA Drift is built for unpredictable weather. A roll-top closure with magnetic buckle seals out rain, while the water-repellent shell shrugs off splashes and spills. The USB-C charging port connects to an internal power-bank pocket, and the padded laptop sleeve keeps your device dry and secure. Side pockets hold a water bottle and compact umbrella.',
+    price: 4299,
+    originalPrice: 5499,
+    rating: 4.6,
+    reviews: 138,
+    colors: ['charcoal', 'navy', 'olive', 'stone'],
+    defaultColor: 'charcoal',
+    featuredImage: PX('18999340'),
+    dimensions: '30 × 18 × 45 cm · 20 L · 0.95 kg',
+    gallery: {
+      charcoal: G(
+        PX('18999340'), PX('9138669'), PX('13869858'),
+        PX('9407366'), PX('33175945'), PX('16359286'),
+      ),
+      navy: G(
+        PX('13870707'), PX('3731256'), PX('13869858'),
+        PX('12743405'), PX('6647813'), PX('16359291'),
+      ),
+      olive: G(
+        PX('2081199'), PX('2081202'), PX('3155047'),
+        PX('16359292'), PX('12115332'), PX('2081202'),
+      ),
+      stone: G(
+        PX('2452345'), PX('32620409'), PX('8004822'),
+        PX('16359310'), PX('12115332'), PX('12032822'),
       ),
     },
   },

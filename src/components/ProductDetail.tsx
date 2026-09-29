@@ -13,7 +13,9 @@ interface ProductDetailProps {
   onCartClick: () => void;
 }
 
-const GALLERY_LABELS: { key: keyof Product['gallery'][ColorKey]; label: string }[] = [
+type GalleryKey = 'front' | 'side' | 'back' | 'inside' | 'lifestyle' | 'detail';
+
+const GALLERY_LABELS: { key: GalleryKey; label: string }[] = [
   { key: 'front', label: 'Front' },
   { key: 'side', label: 'Side' },
   { key: 'back', label: 'Back' },
@@ -22,11 +24,13 @@ const GALLERY_LABELS: { key: keyof Product['gallery'][ColorKey]; label: string }
   { key: 'detail', label: 'Detail' },
 ];
 
+const LIGHT_COLORS: ColorKey[] = ['cream', 'sand', 'stone', 'taupe'];
+
 export function ProductDetail({ product, onClose, onView, onCartClick }: ProductDetailProps) {
   const { addToCart, toggleWishlist, isWishlisted } = useStore();
   const [color, setColor] = useState<ColorKey>(product.defaultColor);
   const [quantity, setQuantity] = useState(1);
-  const [activeImage, setActiveImage] = useState<keyof Product['gallery'][ColorKey]>('front');
+  const [activeImage, setActiveImage] = useState<GalleryKey>('front');
   const [added, setAdded] = useState(false);
 
   useEffect(() => {
@@ -41,7 +45,7 @@ export function ProductDetail({ product, onClose, onView, onCartClick }: Product
     setAdded(false);
   }, [product]);
 
-  const gallery = product.gallery[color];
+  const gallery = product.gallery[color] ?? product.gallery[product.defaultColor]!;
   const wished = isWishlisted(product.id);
   const recommendations = PRODUCTS.filter((p) => p.id !== product.id).slice(0, 4);
 
@@ -152,7 +156,7 @@ export function ProductDetail({ product, onClose, onView, onCartClick }: Product
                       aria-label={COLORS[ck].name}
                     >
                       {color === ck && (
-                        <Check className={`h-4 w-4 ${ck === 'cream' || ck === 'sand' ? 'text-charcoal-900' : 'text-cream-100'}`} />
+                        <Check className={`h-4 w-4 ${LIGHT_COLORS.includes(ck) ? 'text-charcoal-900' : 'text-cream-100'}`} />
                       )}
                     </button>
                   ))}

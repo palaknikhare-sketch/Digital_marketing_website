@@ -14,7 +14,7 @@ export function ProductCard({ product, onView }: ProductCardProps) {
   const wished = isWishlisted(product.id);
   const defaultColor = COLORS[product.defaultColor];
   const mainImage = product.featuredImage;
-  const hoverImage = product.gallery[product.defaultColor].side;
+  const hoverImage = product.gallery[product.defaultColor]?.side ?? product.featuredImage;
 
   return (
     <div className="group flex flex-col">

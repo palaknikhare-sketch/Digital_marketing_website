@@ -1,7 +1,7 @@
 import type { Product, ColorKey } from '@/data/products';
 import { COLORS, PRODUCTS } from '@/data/products';
 
-const COLOR_ORDER: ColorKey[] = ['midnight', 'charcoal', 'sand', 'olive', 'navy', 'cream', 'burgundy'];
+const COLOR_ORDER: ColorKey[] = ['midnight', 'charcoal', 'sand', 'olive', 'navy', 'cream', 'burgundy', 'taupe', 'stone', 'brown'];
 
 function findProductForColor(color: ColorKey): Product | undefined {
   return PRODUCTS.find((p) => p.colors.includes(color));
@@ -16,14 +16,14 @@ export function ColorCollection({ onView }: { onView: (product: Product) => void
           <h2 className="mt-3 font-display text-4xl font-medium tracking-tightish text-charcoal-900 sm:text-5xl">
             Find Your Color.
           </h2>
-          <p className="mt-4 text-charcoal-800/60">Seven tones, one for every personality and every outfit.</p>
+          <p className="mt-4 text-charcoal-800/60">Ten tones, one for every personality and every outfit.</p>
         </div>
 
-        <div className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-4 lg:grid-cols-7">
+        <div className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-5 lg:grid-cols-10">
           {COLOR_ORDER.map((ck) => {
             const product = findProductForColor(ck);
             if (!product) return null;
-            const img = product.gallery[ck].front;
+            const img = product.gallery[ck]?.front ?? product.featuredImage;
             return (
               <button
                 key={ck}

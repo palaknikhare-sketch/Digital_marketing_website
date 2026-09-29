@@ -34,7 +34,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
 
   const addToCart = useCallback((product: Product, color: ColorKey, quantity: number) => {
     const colorName = COLORS[color].name;
-    const image = product.gallery[color].front;
+    const image = product.gallery[color]?.front ?? product.gallery[product.defaultColor]?.front ?? product.featuredImage;
     const cartItemId = `${product.id}-${color}`;
     setCart((prev) => {
       const existing = prev.find((item) => item.id === cartItemId);

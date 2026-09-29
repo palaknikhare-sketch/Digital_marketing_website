@@ -16,9 +16,9 @@ const FILTERS: { key: FilterKey; label: string }[] = [
 const FILTER_MAP: Record<FilterKey, string[]> = {
   all: PRODUCTS.map((p) => p.id),
   popular: PRODUCTS.filter((p) => p.popular).map((p) => p.id),
-  student: ['campus', 'flex', 'metro'],
-  tech: ['tech', 'studio', 'pro'],
-  travel: ['explorer', 'pro', 'urban'],
+  student: ['campus', 'flex', 'metro', 'vesta'],
+  tech: ['tech', 'studio', 'pro', 'graphite'],
+  travel: ['explorer', 'pro', 'urban', 'atlas', 'commute', 'ledger'],
 };
 
 export function ShopSection({ onView }: { onView: (product: Product) => void }) {
@@ -34,7 +34,7 @@ export function ShopSection({ onView }: { onView: (product: Product) => void }) 
             Find Your Everyday Carry
           </h2>
           <p className="mt-4 max-w-lg text-charcoal-800/60">
-            Eight designs, each with its own personality. Find the one that fits your routine.
+            Fifteen designs, each with its own personality. Find the one that fits your routine.
           </p>
         </div>
 
