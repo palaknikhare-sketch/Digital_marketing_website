@@ -28,6 +28,8 @@ export interface Product {
   badge?: string;
   colors: ColorKey[];
   defaultColor: ColorKey;
+  featuredImage: string;
+  dimensions: string;
   gallery: Record<ColorKey, ProductGallery>;
   popular?: boolean;
 }
@@ -59,6 +61,8 @@ export const PRODUCTS: Product[] = [
     badge: 'Bestseller',
     colors: ['midnight', 'charcoal', 'sand', 'navy'],
     defaultColor: 'midnight',
+    featuredImage: 'https://images.pexels.com/photos/13869858/pexels-photo-13869858.jpeg?auto=compress&cs=tinysrgb&h=900&w=700',
+    dimensions: '30 × 18 × 42 cm · 18 L · 0.9 kg',
     popular: true,
     gallery: {
       midnight: G(
@@ -108,6 +112,8 @@ export const PRODUCTS: Product[] = [
     badge: 'Popular',
     colors: ['midnight', 'sand', 'olive', 'burgundy', 'cream'],
     defaultColor: 'sand',
+    featuredImage: 'https://images.pexels.com/photos/15059375/pexels-photo-15059375.jpeg?auto=compress&cs=tinysrgb&h=900&w=700',
+    dimensions: '32 × 20 × 45 cm · 22 L · 1.0 kg',
     popular: true,
     gallery: {
       midnight: G(
@@ -165,6 +171,8 @@ export const PRODUCTS: Product[] = [
     badge: 'Editor\u2019s Pick',
     colors: ['charcoal', 'midnight', 'olive', 'navy'],
     defaultColor: 'charcoal',
+    featuredImage: 'https://images.pexels.com/photos/9138669/pexels-photo-9138669.jpeg?auto=compress&cs=tinysrgb&h=900&w=700',
+    dimensions: '31 × 19 × 44 cm · 20 L · 1.1 kg',
     popular: true,
     gallery: {
       charcoal: G(
@@ -212,6 +220,8 @@ export const PRODUCTS: Product[] = [
     reviews: 142,
     colors: ['midnight', 'charcoal', 'cream', 'burgundy'],
     defaultColor: 'charcoal',
+    featuredImage: 'https://images.pexels.com/photos/36958694/pexels-photo-36958694.jpeg?auto=compress&cs=tinysrgb&h=900&w=700',
+    dimensions: '29 × 17 × 41 cm · 16 L · 0.85 kg',
     gallery: {
       midnight: G(
         'https://images.pexels.com/photos/36958694/pexels-photo-36958694.jpeg?auto=compress&cs=tinysrgb&h=900&w=700',
@@ -259,6 +269,8 @@ export const PRODUCTS: Product[] = [
     reviews: 96,
     colors: ['olive', 'midnight', 'sand', 'burgundy'],
     defaultColor: 'olive',
+    featuredImage: 'https://images.pexels.com/photos/18510443/pexels-photo-18510443.jpeg?auto=compress&cs=tinysrgb&h=900&w=700',
+    dimensions: '34 × 22 × 50 cm · 28 L · 1.3 kg',
     popular: true,
     gallery: {
       olive: G(
@@ -306,6 +318,8 @@ export const PRODUCTS: Product[] = [
     reviews: 78,
     colors: ['cream', 'charcoal', 'navy', 'sand'],
     defaultColor: 'cream',
+    featuredImage: 'https://images.pexels.com/photos/8330659/pexels-photo-8330659.jpeg?auto=compress&cs=tinysrgb&h=900&w=700',
+    dimensions: '31 × 19 × 43 cm · 20 L · 1.0 kg',
     gallery: {
       cream: G(
         'https://images.pexels.com/photos/8330659/pexels-photo-8330659.jpeg?auto=compress&cs=tinysrgb&h=900&w=700',
@@ -353,6 +367,8 @@ export const PRODUCTS: Product[] = [
     reviews: 165,
     colors: ['sand', 'cream', 'navy', 'olive'],
     defaultColor: 'navy',
+    featuredImage: 'https://images.pexels.com/photos/13870707/pexels-photo-13870707.jpeg?auto=compress&cs=tinysrgb&h=900&w=700',
+    dimensions: '28 × 16 × 40 cm · 14 L · 0.7 kg',
     gallery: {
       sand: G(
         'https://images.pexels.com/photos/15059375/pexels-photo-15059375.jpeg?auto=compress&cs=tinysrgb&h=900&w=700',
@@ -401,6 +417,8 @@ export const PRODUCTS: Product[] = [
     badge: 'Flagship',
     colors: ['midnight', 'charcoal', 'olive', 'navy', 'burgundy', 'sand', 'cream'],
     defaultColor: 'midnight',
+    featuredImage: 'https://images.pexels.com/photos/13869858/pexels-photo-13869858.jpeg?auto=compress&cs=tinysrgb&h=900&w=700',
+    dimensions: '35 × 23 × 52 cm · 32 L · 1.4 kg',
     popular: true,
     gallery: {
       midnight: G(

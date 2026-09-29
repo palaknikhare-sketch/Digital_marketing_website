@@ -13,7 +13,7 @@ export function ProductCard({ product, onView }: ProductCardProps) {
   const { toggleWishlist, isWishlisted } = useStore();
   const wished = isWishlisted(product.id);
   const defaultColor = COLORS[product.defaultColor];
-  const mainImage = product.gallery[product.defaultColor].front;
+  const mainImage = product.featuredImage;
   const hoverImage = product.gallery[product.defaultColor].side;
 
   return (
