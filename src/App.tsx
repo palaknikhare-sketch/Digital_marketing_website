@@ -1,89 +1,29 @@
-import { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { StoreProvider } from '@/store/StoreContext';
-import { Navbar } from '@/components/Navbar';
-import { Hero } from '@/components/Hero';
-import { Highlights } from '@/components/Highlights';
-import { ShopSection } from '@/components/ShopSection';
-import { PopularThisWeek } from '@/components/PopularThisWeek';
-import { Technology } from '@/components/Technology';
-import { Organization } from '@/components/Organization';
-import { WhatFitsInside } from '@/components/WhatFitsInside';
-import { FeaturesGrid } from '@/components/FeaturesGrid';
-import { Lifestyle } from '@/components/Lifestyle';
-import { ColorCollection } from '@/components/ColorCollection';
-import { Reviews } from '@/components/Reviews';
-import { PromoBanner } from '@/components/PromoBanner';
-import { Footer } from '@/components/Footer';
-import { ProductDetail } from '@/components/ProductDetail';
-import { CartDrawer } from '@/components/CartDrawer';
-import { Checkout } from '@/components/Checkout';
-import { WishlistDrawer } from '@/components/WishlistDrawer';
-import type { Product } from '@/data/products';
+import { ScrollToTop } from '@/components/ScrollToTop';
+import { Layout } from '@/components/Layout';
+import { HomePage } from '@/pages/HomePage';
+import { ShopPage } from '@/pages/ShopPage';
+import { TechnologyPage } from '@/pages/TechnologyPage';
+import { ReviewsPage } from '@/pages/ReviewsPage';
+import { ProductPage } from '@/pages/ProductPage';
 
 function App() {
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [cartOpen, setCartOpen] = useState(false);
-  const [checkoutOpen, setCheckoutOpen] = useState(false);
-  const [wishlistOpen, setWishlistOpen] = useState(false);
-
-  const scrollTo = (href: string) => document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
-
-  const handleView = (product: Product) => setSelectedProduct(product);
-
-  const handleBuyNowCart = () => {
-    setCartOpen(false);
-    setCheckoutOpen(true);
-  };
-
   return (
     <StoreProvider>
-      <Navbar onCartClick={() => setCartOpen(true)} onWishlistClick={() => setWishlistOpen(true)} />
-
-      <main>
-        <Hero
-          onShopClick={() => scrollTo('#shop')}
-          onTechClick={() => scrollTo('#technology')}
-        />
-        <Highlights />
-        <ShopSection onView={handleView} />
-        <PopularThisWeek onView={handleView} />
-        <Technology />
-        <Organization />
-        <WhatFitsInside />
-        <FeaturesGrid />
-        <Lifestyle />
-        <ColorCollection onView={handleView} />
-        <Reviews />
-        <PromoBanner onShopClick={() => scrollTo('#shop')} />
-      </main>
-
-      <Footer />
-
-      {selectedProduct && (
-        <ProductDetail
-          product={selectedProduct}
-          onClose={() => setSelectedProduct(null)}
-          onView={handleView}
-          onCartClick={() => setCartOpen(true)}
-        />
-      )}
-
-      <CartDrawer
-        open={cartOpen}
-        onClose={() => setCartOpen(false)}
-        onCheckout={handleBuyNowCart}
-      />
-
-      <Checkout
-        open={checkoutOpen}
-        onClose={() => setCheckoutOpen(false)}
-      />
-
-      <WishlistDrawer
-        open={wishlistOpen}
-        onClose={() => setWishlistOpen(false)}
-        onView={handleView}
-      />
+      <BrowserRouter>
+        <ScrollToTop />
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/shop" element={<ShopPage />} />
+            <Route path="/technology" element={<TechnologyPage />} />
+            <Route path="/reviews" element={<ReviewsPage />} />
+            <Route path="/product/:id" element={<ProductPage />} />
+            <Route path="*" element={<HomePage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </StoreProvider>
   );
 }

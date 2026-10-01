@@ -3,7 +3,7 @@ import { HERO_IMAGE } from '@/data/products';
 
 export function Hero({ onShopClick, onTechClick }: { onShopClick: () => void; onTechClick: () => void }) {
   return (
-    <section id="home" className="relative overflow-hidden bg-cream-100 pt-28 pb-16 sm:pt-32 lg:pt-36">
+    <section className="relative overflow-hidden bg-cream-100 pt-28 pb-16 sm:pt-32 lg:pt-36">
       <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 sm:px-8 lg:grid-cols-2 lg:gap-16">
         <div className="nova-fade-up order-2 lg:order-1">
           <span className="inline-flex items-center gap-2 rounded-full border border-charcoal-900/15 bg-cream-50 px-4 py-1.5 text-xs font-medium uppercase tracking-wider text-charcoal-700">
@@ -34,9 +34,9 @@ export function Hero({ onShopClick, onTechClick }: { onShopClick: () => void; on
             </button>
           </div>
           <div className="mt-12 flex items-center gap-8">
-            <Stat value="8" label="Designs" />
+            <Stat value="15" label="Designs" />
             <div className="h-10 w-px bg-charcoal-900/10" />
-            <Stat value="7" label="Colors" />
+            <Stat value="10" label="Colors" />
             <div className="h-10 w-px bg-charcoal-900/10" />
             <Stat value="30-Day" label="Returns" />
           </div>

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Mail, Instagram, Twitter, Youtube, Check } from 'lucide-react';
 
 export function Footer() {
@@ -62,9 +63,21 @@ export function Footer() {
             <p className="mt-3 text-sm text-olive-300">Carry Smarter. Go Further.</p>
           </div>
 
-          <FooterCol title="Shop" links={['All Backpacks', 'New Collection', 'Popular this Week', 'Color Collection']} />
-          <FooterCol title="Company" links={['About NOVA', 'Technology', 'Reviews', 'Sustainability']} />
-          <FooterCol title="Support" links={['Shipping & Delivery', '30-Day Returns', 'Warranty', 'Contact Us']} />
+          <FooterCol title="Shop" links={[
+            { label: 'All Backpacks', to: '/shop' },
+            { label: 'Popular this Week', to: '/shop' },
+            { label: 'Color Collection', to: '/shop' },
+          ]} />
+          <FooterCol title="Company" links={[
+            { label: 'Technology', to: '/technology' },
+            { label: 'Reviews', to: '/reviews' },
+          ]} />
+          <FooterCol title="Support" links={[
+            { label: 'Shipping & Delivery', to: '/shop' },
+            { label: '30-Day Returns', to: '/shop' },
+            { label: 'Warranty', to: '/shop' },
+            { label: 'Contact Us', to: '/' },
+          ]} />
         </div>
 
         <div className="mt-12 flex flex-col items-center justify-between gap-6 border-t border-cream-100/10 pt-8 sm:flex-row">
@@ -82,16 +95,16 @@ export function Footer() {
   );
 }
 
-function FooterCol({ title, links }: { title: string; links: string[] }) {
+function FooterCol({ title, links }: { title: string; links: { label: string; to: string }[] }) {
   return (
     <div>
       <p className="text-sm font-semibold text-cream-100">{title}</p>
       <ul className="mt-4 space-y-2.5">
         {links.map((link) => (
-          <li key={link}>
-            <a href="#" onClick={(e) => e.preventDefault()} className="text-sm text-cream-100/55 transition-colors hover:text-cream-100">
-              {link}
-            </a>
+          <li key={link.label}>
+            <Link to={link.to} className="text-sm text-cream-100/55 transition-colors hover:text-cream-100">
+              {link.label}
+            </Link>
           </li>
         ))}
       </ul>

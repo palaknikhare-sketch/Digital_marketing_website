@@ -1,19 +1,20 @@
 import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ShoppingBag, Heart } from 'lucide-react';
 import { useStore } from '@/store/StoreContext';
 
 const NAV_LINKS = [
-  { label: 'Home', href: '#home' },
-  { label: 'Shop', href: '#shop' },
-  { label: 'Features', href: '#features' },
-  { label: 'Technology', href: '#technology' },
-  { label: 'Reviews', href: '#reviews' },
+  { label: 'Home', to: '/' },
+  { label: 'Shop', to: '/shop' },
+  { label: 'Technology', to: '/technology' },
+  { label: 'Reviews', to: '/reviews' },
 ];
 
 export function Navbar({ onCartClick, onWishlistClick }: { onCartClick: () => void; onWishlistClick: () => void }) {
   const { cartCount, wishlist } = useStore();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -21,37 +22,39 @@ export function Navbar({ onCartClick, onWishlistClick }: { onCartClick: () => vo
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const scrollTo = (href: string) => {
+  useEffect(() => {
     setMenuOpen(false);
-    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
-  };
+  }, [location.pathname]);
+
+  const isHome = location.pathname === '/';
+  const showScrolled = scrolled || !isHome;
 
   return (
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled ? 'bg-cream-100/90 backdrop-blur-md shadow-[0_1px_0_0_rgba(43,40,38,0.08)]' : 'bg-transparent'
+          showScrolled ? 'bg-cream-100/90 backdrop-blur-md shadow-[0_1px_0_0_rgba(43,40,38,0.08)]' : 'bg-transparent'
         }`}
       >
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
-          <a
-            href="#home"
-            onClick={(e) => { e.preventDefault(); scrollTo('#home'); }}
+          <Link
+            to="/"
             className="font-display text-2xl font-semibold tracking-tightish text-charcoal-900"
           >
             NOVA
-          </a>
+          </Link>
 
           <div className="hidden items-center gap-8 lg:flex">
             {NAV_LINKS.map((link) => (
-              <a
+              <Link
                 key={link.label}
-                href={link.href}
-                onClick={(e) => { e.preventDefault(); scrollTo(link.href); }}
-                className="text-sm font-medium text-charcoal-800/80 transition-colors hover:text-charcoal-900"
+                to={link.to}
+                className={`text-sm font-medium transition-colors hover:text-charcoal-900 ${
+                  location.pathname === link.to ? 'text-charcoal-900' : 'text-charcoal-800/80'
+                }`}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -80,12 +83,12 @@ export function Navbar({ onCartClick, onWishlistClick }: { onCartClick: () => vo
                 </span>
               )}
             </button>
-            <button
-              onClick={() => scrollTo('#shop')}
+            <Link
+              to="/shop"
               className="hidden rounded-full bg-charcoal-900 px-5 py-2.5 text-sm font-medium text-cream-100 transition-all hover:bg-charcoal-800 hover:shadow-lg sm:inline-block"
             >
               Shop Now
-            </button>
+            </Link>
             <button
               onClick={() => setMenuOpen(true)}
               className="rounded-full p-2 text-charcoal-800 transition-colors hover:bg-charcoal-900/5 lg:hidden"
@@ -121,21 +124,22 @@ export function Navbar({ onCartClick, onWishlistClick }: { onCartClick: () => vo
           </div>
           <div className="flex flex-col gap-1 px-5 py-4">
             {NAV_LINKS.map((link) => (
-              <a
+              <Link
                 key={link.label}
-                href={link.href}
-                onClick={(e) => { e.preventDefault(); scrollTo(link.href); }}
-                className="rounded-lg px-3 py-3 text-base font-medium text-charcoal-800 transition-colors hover:bg-charcoal-900/5"
+                to={link.to}
+                className={`rounded-lg px-3 py-3 text-base font-medium transition-colors hover:bg-charcoal-900/5 ${
+                  location.pathname === link.to ? 'text-charcoal-900' : 'text-charcoal-800'
+                }`}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
-            <button
-              onClick={() => scrollTo('#shop')}
+            <Link
+              to="/shop"
               className="mt-4 rounded-full bg-charcoal-900 px-5 py-3 text-center text-sm font-medium text-cream-100"
             >
               Shop Now
-            </button>
+            </Link>
           </div>
         </div>
       </div>
