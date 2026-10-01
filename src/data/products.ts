@@ -47,14 +47,41 @@ export const COLORS: Record<ColorKey, ProductColor> = {
   brown: { key: 'brown', name: 'Dark Brown', hex: '#4A3B2E' },
 };
 
-const PX = (id: string, h = 900, w = 700) =>
-  `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&h=${h}&w=${w}`;
+// ---------------------------------------------------------------------------
+// IMAGE PATH HELPERS
+//
+// All images are served from /images/ (maps to public/images/ on disk).
+// Upload your own files there and update the paths below as needed.
+//
+// Naming convention for product gallery images:
+//   /images/{productId}-{color}-{view}.jpg
+// where {view} is one of: front, side, back, inside, lifestyle, detail
+//
+// Example: /images/metro-midnight-front.jpg
+// ---------------------------------------------------------------------------
 
-const G = (front: string, side: string, back: string, inside: string, lifestyle: string, detail: string): ProductGallery =>
-  ({ front, side, back, inside, lifestyle, detail });
+const IMG = (file: string) => `/images/${file}`;
 
-// Each product uses a distinct set of premium professional backpack photos.
-// No two products share the same featured image. Images sourced from Pexels.
+const G = (
+  front: string,
+  side: string,
+  back: string,
+  inside: string,
+  lifestyle: string,
+  detail: string,
+): ProductGallery => ({ front, side, back, inside, lifestyle, detail });
+
+// Convenience: generate all 6 gallery paths for a single product+color combo
+// using the standard naming convention. Replace with G() calls once you
+// upload non-uniform images.
+const gal = (productId: string, color: ColorKey): ProductGallery => ({
+  front:     IMG(`${productId}-${color}-front.jpg`),
+  side:      IMG(`${productId}-${color}-side.jpg`),
+  back:      IMG(`${productId}-${color}-back.jpg`),
+  inside:    IMG(`${productId}-${color}-inside.jpg`),
+  lifestyle: IMG(`${productId}-${color}-lifestyle.jpg`),
+  detail:    IMG(`${productId}-${color}-detail.jpg`),
+});
 
 export const PRODUCTS: Product[] = [
   // 1 — NOVA Metro — sleek black commuter
@@ -71,26 +98,14 @@ export const PRODUCTS: Product[] = [
     badge: 'Bestseller',
     colors: ['midnight', 'charcoal', 'sand', 'navy'],
     defaultColor: 'midnight',
-    featuredImage: PX('13869858'),
+    featuredImage: IMG('metro-midnight-front.jpg'),
     dimensions: '30 × 18 × 42 cm · 18 L · 0.9 kg',
     popular: true,
     gallery: {
-      midnight: G(
-        PX('13869858'), PX('9138669'), PX('3731256'),
-        PX('9407364'), PX('6107428'), PX('16359298'),
-      ),
-      charcoal: G(
-        PX('9138669'), PX('3731256'), PX('13869858'),
-        PX('9407366'), PX('33175945'), PX('16359286'),
-      ),
-      sand: G(
-        PX('15059375'), PX('8502482'), PX('8004822'),
-        PX('16359310'), PX('12115332'), PX('12032822'),
-      ),
-      navy: G(
-        PX('13870707'), PX('3731256'), PX('13869858'),
-        PX('9407362'), PX('26855724'), PX('16359291'),
-      ),
+      midnight: gal('metro', 'midnight'),
+      charcoal: gal('metro', 'charcoal'),
+      sand: gal('metro', 'sand'),
+      navy: gal('metro', 'navy'),
     },
   },
   // 2 — NOVA Campus — student/college
@@ -107,30 +122,15 @@ export const PRODUCTS: Product[] = [
     badge: 'Popular',
     colors: ['midnight', 'sand', 'olive', 'burgundy', 'cream'],
     defaultColor: 'sand',
-    featuredImage: PX('15059375'),
+    featuredImage: IMG('campus-sand-front.jpg'),
     dimensions: '32 × 20 × 45 cm · 22 L · 1.0 kg',
     popular: true,
     gallery: {
-      midnight: G(
-        PX('18269634'), PX('9407366'), PX('3731256'),
-        PX('12743405'), PX('11034916'), PX('16359288'),
-      ),
-      sand: G(
-        PX('15059375'), PX('8502482'), PX('8004822'),
-        PX('16359310'), PX('12115332'), PX('12032822'),
-      ),
-      olive: G(
-        PX('2081199'), PX('2081202'), PX('3155047'),
-        PX('16359292'), PX('12115332'), PX('2081202'),
-      ),
-      burgundy: G(
-        PX('15246346'), PX('19269899'), PX('7043472'),
-        PX('16359309'), PX('7043472'), PX('12032822'),
-      ),
-      cream: G(
-        PX('8004822'), PX('8502482'), PX('15059375'),
-        PX('16359310'), PX('12115332'), PX('12032822'),
-      ),
+      midnight: gal('campus', 'midnight'),
+      sand: gal('campus', 'sand'),
+      olive: gal('campus', 'olive'),
+      burgundy: gal('campus', 'burgundy'),
+      cream: gal('campus', 'cream'),
     },
   },
   // 3 — NOVA Tech — programmer/creator organization
@@ -147,26 +147,14 @@ export const PRODUCTS: Product[] = [
     badge: 'Editor\u2019s Pick',
     colors: ['charcoal', 'midnight', 'olive', 'navy'],
     defaultColor: 'charcoal',
-    featuredImage: PX('9138669'),
+    featuredImage: IMG('tech-charcoal-front.jpg'),
     dimensions: '31 × 19 × 44 cm · 20 L · 1.1 kg',
     popular: true,
     gallery: {
-      charcoal: G(
-        PX('9138669'), PX('16359298'), PX('13869858'),
-        PX('16359310'), PX('6334231'), PX('16359286'),
-      ),
-      midnight: G(
-        PX('13869858'), PX('9138669'), PX('3731256'),
-        PX('12743405'), PX('6107428'), PX('16359291'),
-      ),
-      olive: G(
-        PX('2081199'), PX('2081202'), PX('3155047'),
-        PX('16359292'), PX('6334231'), PX('2081202'),
-      ),
-      navy: G(
-        PX('13870707'), PX('3731256'), PX('13869858'),
-        PX('16359309'), PX('6647813'), PX('16359288'),
-      ),
+      charcoal: gal('tech', 'charcoal'),
+      midnight: gal('tech', 'midnight'),
+      olive: gal('tech', 'olive'),
+      navy: gal('tech', 'navy'),
     },
   },
   // 4 — NOVA Urban — premium city
@@ -181,25 +169,13 @@ export const PRODUCTS: Product[] = [
     reviews: 142,
     colors: ['midnight', 'charcoal', 'cream', 'burgundy'],
     defaultColor: 'charcoal',
-    featuredImage: PX('3731256'),
+    featuredImage: IMG('urban-charcoal-front.jpg'),
     dimensions: '29 × 17 × 41 cm · 16 L · 0.85 kg',
     gallery: {
-      midnight: G(
-        PX('3731256'), PX('13869858'), PX('9138669'),
-        PX('9407364'), PX('15706242'), PX('16359298'),
-      ),
-      charcoal: G(
-        PX('18999340'), PX('9138669'), PX('13869858'),
-        PX('9407366'), PX('11034916'), PX('16359291'),
-      ),
-      cream: G(
-        PX('8004822'), PX('8502482'), PX('15059375'),
-        PX('16359310'), PX('12115332'), PX('12032822'),
-      ),
-      burgundy: G(
-        PX('15246346'), PX('19269899'), PX('7043472'),
-        PX('16359309'), PX('7043472'), PX('12032822'),
-      ),
+      midnight: gal('urban', 'midnight'),
+      charcoal: gal('urban', 'charcoal'),
+      cream: gal('urban', 'cream'),
+      burgundy: gal('urban', 'burgundy'),
     },
   },
   // 5 — NOVA Explorer — travel/weekend
@@ -215,26 +191,14 @@ export const PRODUCTS: Product[] = [
     reviews: 96,
     colors: ['olive', 'midnight', 'sand', 'burgundy'],
     defaultColor: 'olive',
-    featuredImage: PX('2081199'),
+    featuredImage: IMG('explorer-olive-front.jpg'),
     dimensions: '34 × 22 × 50 cm · 28 L · 1.3 kg',
     popular: true,
     gallery: {
-      olive: G(
-        PX('2081199'), PX('2081202'), PX('3155047'),
-        PX('16359292'), PX('12115332'), PX('2081202'),
-      ),
-      midnight: G(
-        PX('18269634'), PX('9407366'), PX('3731256'),
-        PX('9407364'), PX('15706242'), PX('16359288'),
-      ),
-      sand: G(
-        PX('15059375'), PX('8502482'), PX('8004822'),
-        PX('16359310'), PX('3155047'), PX('12032822'),
-      ),
-      burgundy: G(
-        PX('15246346'), PX('19269899'), PX('7043472'),
-        PX('16359309'), PX('7043472'), PX('12032822'),
-      ),
+      olive: gal('explorer', 'olive'),
+      midnight: gal('explorer', 'midnight'),
+      sand: gal('explorer', 'sand'),
+      burgundy: gal('explorer', 'burgundy'),
     },
   },
   // 6 — NOVA Studio — creator/professional
@@ -249,25 +213,13 @@ export const PRODUCTS: Product[] = [
     reviews: 78,
     colors: ['cream', 'charcoal', 'navy', 'sand'],
     defaultColor: 'cream',
-    featuredImage: PX('8004822'),
+    featuredImage: IMG('studio-cream-front.jpg'),
     dimensions: '31 × 19 × 43 cm · 20 L · 1.0 kg',
     gallery: {
-      cream: G(
-        PX('8004822'), PX('8502482'), PX('15059375'),
-        PX('16359310'), PX('12115332'), PX('12032822'),
-      ),
-      charcoal: G(
-        PX('9138669'), PX('16359298'), PX('13869858'),
-        PX('16359292'), PX('6334231'), PX('16359286'),
-      ),
-      navy: G(
-        PX('13870707'), PX('3731256'), PX('13869858'),
-        PX('16359309'), PX('6647813'), PX('16359291'),
-      ),
-      sand: G(
-        PX('15059375'), PX('8502482'), PX('8004822'),
-        PX('16359310'), PX('12115332'), PX('12032822'),
-      ),
+      cream: gal('studio', 'cream'),
+      charcoal: gal('studio', 'charcoal'),
+      navy: gal('studio', 'navy'),
+      sand: gal('studio', 'sand'),
     },
   },
   // 7 — NOVA Flex — lightweight everyday
@@ -283,25 +235,13 @@ export const PRODUCTS: Product[] = [
     reviews: 165,
     colors: ['sand', 'cream', 'navy', 'olive'],
     defaultColor: 'navy',
-    featuredImage: PX('13870707'),
+    featuredImage: IMG('flex-navy-front.jpg'),
     dimensions: '28 × 16 × 40 cm · 14 L · 0.7 kg',
     gallery: {
-      sand: G(
-        PX('15059375'), PX('8502482'), PX('8004822'),
-        PX('16359310'), PX('12115332'), PX('12032822'),
-      ),
-      cream: G(
-        PX('8004822'), PX('8502482'), PX('15059375'),
-        PX('16359309'), PX('12115332'), PX('12032822'),
-      ),
-      navy: G(
-        PX('13870707'), PX('3731256'), PX('13869858'),
-        PX('12743405'), PX('6647813'), PX('16359291'),
-      ),
-      olive: G(
-        PX('2081199'), PX('2081202'), PX('3155047'),
-        PX('16359292'), PX('12115332'), PX('2081202'),
-      ),
+      sand: gal('flex', 'sand'),
+      cream: gal('flex', 'cream'),
+      navy: gal('flex', 'navy'),
+      olive: gal('flex', 'olive'),
     },
   },
   // 8 — NOVA Pro — flagship high-capacity
@@ -318,38 +258,17 @@ export const PRODUCTS: Product[] = [
     badge: 'Flagship',
     colors: ['midnight', 'charcoal', 'olive', 'navy', 'burgundy', 'sand', 'cream'],
     defaultColor: 'midnight',
-    featuredImage: PX('18269634'),
+    featuredImage: IMG('pro-midnight-front.jpg'),
     dimensions: '35 × 23 × 52 cm · 32 L · 1.4 kg',
     popular: true,
     gallery: {
-      midnight: G(
-        PX('18269634'), PX('9407366'), PX('3731256'),
-        PX('9407364'), PX('11034916'), PX('16359298'),
-      ),
-      charcoal: G(
-        PX('9138669'), PX('16359298'), PX('13869858'),
-        PX('16359310'), PX('33175945'), PX('16359286'),
-      ),
-      olive: G(
-        PX('2081199'), PX('2081202'), PX('3155047'),
-        PX('16359292'), PX('12115332'), PX('2081202'),
-      ),
-      navy: G(
-        PX('13870707'), PX('3731256'), PX('13869858'),
-        PX('16359309'), PX('6647813'), PX('16359291'),
-      ),
-      burgundy: G(
-        PX('15246346'), PX('19269899'), PX('7043472'),
-        PX('16359309'), PX('7043472'), PX('12032822'),
-      ),
-      sand: G(
-        PX('15059375'), PX('8502482'), PX('8004822'),
-        PX('16359310'), PX('3155047'), PX('12032822'),
-      ),
-      cream: G(
-        PX('8004822'), PX('8502482'), PX('15059375'),
-        PX('16359310'), PX('12115332'), PX('12032822'),
-      ),
+      midnight: gal('pro', 'midnight'),
+      charcoal: gal('pro', 'charcoal'),
+      olive: gal('pro', 'olive'),
+      navy: gal('pro', 'navy'),
+      burgundy: gal('pro', 'burgundy'),
+      sand: gal('pro', 'sand'),
+      cream: gal('pro', 'cream'),
     },
   },
   // 9 — NOVA Executive — structured business
@@ -366,26 +285,14 @@ export const PRODUCTS: Product[] = [
     badge: 'New',
     colors: ['midnight', 'brown', 'charcoal', 'navy'],
     defaultColor: 'brown',
-    featuredImage: PX('15246346'),
+    featuredImage: IMG('executive-brown-front.jpg'),
     dimensions: '33 × 21 × 46 cm · 24 L · 1.2 kg',
     popular: true,
     gallery: {
-      midnight: G(
-        PX('13869858'), PX('9138669'), PX('3731256'),
-        PX('9407364'), PX('4962552'), PX('16359298'),
-      ),
-      brown: G(
-        PX('15246346'), PX('14601178'), PX('8502482'),
-        PX('16359310'), PX('33342693'), PX('12032822'),
-      ),
-      charcoal: G(
-        PX('9138669'), PX('16359298'), PX('13869858'),
-        PX('16359310'), PX('6334231'), PX('16359286'),
-      ),
-      navy: G(
-        PX('13870707'), PX('3731256'), PX('13869858'),
-        PX('16359309'), PX('6647813'), PX('16359291'),
-      ),
+      midnight: gal('executive', 'midnight'),
+      brown: gal('executive', 'brown'),
+      charcoal: gal('executive', 'charcoal'),
+      navy: gal('executive', 'navy'),
     },
   },
   // 10 — NOVA Graphite — sleek minimalist tech
@@ -400,25 +307,13 @@ export const PRODUCTS: Product[] = [
     reviews: 89,
     colors: ['charcoal', 'midnight', 'stone', 'navy'],
     defaultColor: 'charcoal',
-    featuredImage: PX('18999340'),
+    featuredImage: IMG('graphite-charcoal-front.jpg'),
     dimensions: '30 × 18 × 43 cm · 19 L · 1.0 kg',
     gallery: {
-      charcoal: G(
-        PX('18999340'), PX('9138669'), PX('13869858'),
-        PX('9407366'), PX('33175945'), PX('16359291'),
-      ),
-      midnight: G(
-        PX('3731256'), PX('13869858'), PX('9138669'),
-        PX('9407364'), PX('15706242'), PX('16359298'),
-      ),
-      stone: G(
-        PX('2452345'), PX('32620409'), PX('8004822'),
-        PX('16359310'), PX('12115332'), PX('12032822'),
-      ),
-      navy: G(
-        PX('13870707'), PX('3731256'), PX('13869858'),
-        PX('12743405'), PX('6647813'), PX('16359288'),
-      ),
+      charcoal: gal('graphite', 'charcoal'),
+      midnight: gal('graphite', 'midnight'),
+      stone: gal('graphite', 'stone'),
+      navy: gal('graphite', 'navy'),
     },
   },
   // 11 — NOVA Commute — transit-optimized
@@ -434,26 +329,14 @@ export const PRODUCTS: Product[] = [
     reviews: 156,
     colors: ['midnight', 'navy', 'charcoal', 'taupe'],
     defaultColor: 'midnight',
-    featuredImage: PX('3731256'),
+    featuredImage: IMG('commute-midnight-front.jpg'),
     dimensions: '31 × 19 × 44 cm · 21 L · 1.0 kg',
     popular: true,
     gallery: {
-      midnight: G(
-        PX('3731256'), PX('13869858'), PX('9138669'),
-        PX('9407362'), PX('11483160'), PX('16359298'),
-      ),
-      navy: G(
-        PX('13870707'), PX('3731256'), PX('13869858'),
-        PX('16359309'), PX('15706242'), PX('16359291'),
-      ),
-      charcoal: G(
-        PX('9138669'), PX('16359298'), PX('13869858'),
-        PX('9407366'), PX('11034916'), PX('16359286'),
-      ),
-      taupe: G(
-        PX('8004822'), PX('8502482'), PX('15059375'),
-        PX('16359310'), PX('12115332'), PX('12032822'),
-      ),
+      midnight: gal('commute', 'midnight'),
+      navy: gal('commute', 'navy'),
+      charcoal: gal('commute', 'charcoal'),
+      taupe: gal('commute', 'taupe'),
     },
   },
   // 12 — NOVA Atlas — high-capacity travel-tech
@@ -470,30 +353,15 @@ export const PRODUCTS: Product[] = [
     badge: 'New',
     colors: ['midnight', 'olive', 'charcoal', 'navy', 'sand'],
     defaultColor: 'midnight',
-    featuredImage: PX('18269634'),
+    featuredImage: IMG('atlas-midnight-front.jpg'),
     dimensions: '36 × 24 × 52 cm · 28–35 L · 1.5 kg',
     popular: true,
     gallery: {
-      midnight: G(
-        PX('18269634'), PX('9407366'), PX('3731256'),
-        PX('12743405'), PX('11034916'), PX('16359298'),
-      ),
-      olive: G(
-        PX('2081199'), PX('2081202'), PX('3155047'),
-        PX('16359292'), PX('12115332'), PX('2081202'),
-      ),
-      charcoal: G(
-        PX('9138669'), PX('16359298'), PX('13869858'),
-        PX('16359310'), PX('6334231'), PX('16359286'),
-      ),
-      navy: G(
-        PX('13870707'), PX('3731256'), PX('13869858'),
-        PX('16359309'), PX('6647813'), PX('16359291'),
-      ),
-      sand: G(
-        PX('15059375'), PX('8502482'), PX('8004822'),
-        PX('16359310'), PX('3155047'), PX('12032822'),
-      ),
+      midnight: gal('atlas', 'midnight'),
+      olive: gal('atlas', 'olive'),
+      charcoal: gal('atlas', 'charcoal'),
+      navy: gal('atlas', 'navy'),
+      sand: gal('atlas', 'sand'),
     },
   },
   // 13 — NOVA Vesta — women's professional
@@ -508,25 +376,13 @@ export const PRODUCTS: Product[] = [
     reviews: 94,
     colors: ['burgundy', 'cream', 'navy', 'brown'],
     defaultColor: 'burgundy',
-    featuredImage: PX('19269899'),
+    featuredImage: IMG('vesta-burgundy-front.jpg'),
     dimensions: '30 × 18 × 42 cm · 17 L · 0.9 kg',
     gallery: {
-      burgundy: G(
-        PX('19269899'), PX('15246346'), PX('7043472'),
-        PX('16359309'), PX('7043472'), PX('12032822'),
-      ),
-      cream: G(
-        PX('8004822'), PX('8502482'), PX('15059375'),
-        PX('16359310'), PX('12115332'), PX('12032822'),
-      ),
-      navy: G(
-        PX('13870707'), PX('3731256'), PX('13869858'),
-        PX('16359309'), PX('6647813'), PX('16359291'),
-      ),
-      brown: G(
-        PX('15246346'), PX('14601178'), PX('8502482'),
-        PX('16359310'), PX('33342693'), PX('12032822'),
-      ),
+      burgundy: gal('vesta', 'burgundy'),
+      cream: gal('vesta', 'cream'),
+      navy: gal('vesta', 'navy'),
+      brown: gal('vesta', 'brown'),
     },
   },
   // 14 — NOVA Ledger — leather executive
@@ -543,21 +399,12 @@ export const PRODUCTS: Product[] = [
     badge: 'Premium',
     colors: ['brown', 'midnight', 'burgundy'],
     defaultColor: 'brown',
-    featuredImage: PX('14601178'),
+    featuredImage: IMG('ledger-brown-front.jpg'),
     dimensions: '32 × 20 × 44 cm · 22 L · 1.3 kg',
     gallery: {
-      brown: G(
-        PX('14601178'), PX('15246346'), PX('8502482'),
-        PX('16359310'), PX('33342693'), PX('12032822'),
-      ),
-      midnight: G(
-        PX('13869858'), PX('9138669'), PX('3731256'),
-        PX('9407364'), PX('4962552'), PX('16359298'),
-      ),
-      burgundy: G(
-        PX('15246346'), PX('19269899'), PX('7043472'),
-        PX('16359309'), PX('7043472'), PX('12032822'),
-      ),
+      brown: gal('ledger', 'brown'),
+      midnight: gal('ledger', 'midnight'),
+      burgundy: gal('ledger', 'burgundy'),
     },
   },
   // 15 — NOVA Drift — water-resistant commuter
@@ -573,25 +420,13 @@ export const PRODUCTS: Product[] = [
     reviews: 138,
     colors: ['charcoal', 'navy', 'olive', 'stone'],
     defaultColor: 'charcoal',
-    featuredImage: PX('18999340'),
+    featuredImage: IMG('drift-charcoal-front.jpg'),
     dimensions: '30 × 18 × 45 cm · 20 L · 0.95 kg',
     gallery: {
-      charcoal: G(
-        PX('18999340'), PX('9138669'), PX('13869858'),
-        PX('9407366'), PX('33175945'), PX('16359286'),
-      ),
-      navy: G(
-        PX('13870707'), PX('3731256'), PX('13869858'),
-        PX('12743405'), PX('6647813'), PX('16359291'),
-      ),
-      olive: G(
-        PX('2081199'), PX('2081202'), PX('3155047'),
-        PX('16359292'), PX('12115332'), PX('2081202'),
-      ),
-      stone: G(
-        PX('2452345'), PX('32620409'), PX('8004822'),
-        PX('16359310'), PX('12115332'), PX('12032822'),
-      ),
+      charcoal: gal('drift', 'charcoal'),
+      navy: gal('drift', 'navy'),
+      olive: gal('drift', 'olive'),
+      stone: gal('drift', 'stone'),
     },
   },
 ];
@@ -641,12 +476,12 @@ export const REVIEWS: Review[] = [
 ];
 
 export const LIFESTYLE_IMAGES = {
-  campus: PX('4962552', 800, 1200),
-  study: PX('5950172', 800, 1200),
-  commute: PX('11483160', 800, 1200),
-  coding: PX('5950097', 800, 1200),
+  campus: IMG('lifestyle-campus.jpg'),
+  study: IMG('lifestyle-study.jpg'),
+  commute: IMG('lifestyle-commute.jpg'),
+  coding: IMG('lifestyle-coding.jpg'),
 };
 
-export const FLAT_LAY_IMAGE = PX('12743405', 800, 1200);
-export const OPEN_BAG_IMAGE = PX('16359310', 900, 1200);
-export const HERO_IMAGE = PX('18269634', 1100, 900);
+export const FLAT_LAY_IMAGE = IMG('flat-lay.jpg');
+export const OPEN_BAG_IMAGE = IMG('open-bag.jpg');
+export const HERO_IMAGE = IMG('hero.jpg');

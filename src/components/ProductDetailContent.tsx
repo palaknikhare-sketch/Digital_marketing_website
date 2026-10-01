@@ -83,7 +83,11 @@ export function ProductDetailContent({
                   activeImage === g.key ? 'border-charcoal-900' : 'border-transparent opacity-60 hover:opacity-100'
                 }`}
               >
-                <img src={gallery[g.key]} alt={g.label} className="aspect-square w-full object-cover" />
+                <img
+                  src={gallery[g.key]}
+                  alt={g.label}
+                  className="aspect-square w-full object-cover"
+                />
               </button>
             ))}
           </div>
