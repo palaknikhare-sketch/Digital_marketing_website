@@ -16,7 +16,7 @@ export function Hero({ onShopClick, onTechClick }: { onShopClick: () => void; on
             <span className="text-olive-500">Go Further.</span>
           </h1>
           <p className="mt-6 max-w-md text-lg leading-relaxed text-charcoal-800/70">
-            Professional smart backpacks engineered for the modern workplace — built for those who carry their office on their back.
+            Smart backpacks designed for the way you study, work, commute and create.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:gap-4">
             <button
@@ -53,8 +53,8 @@ export function Hero({ onShopClick, onTechClick }: { onShopClick: () => void; on
                 loading="eager"
               />
               <div className="absolute bottom-5 left-5 rounded-2xl bg-cream-100/90 px-5 py-3 backdrop-blur-sm">
-                <p className="font-display text-lg font-medium text-charcoal-900">NOVA Pro</p>
-                <p className="text-xs text-charcoal-800/60">From ₹6,499 · Midnight Black</p>
+                <p className="font-display text-lg font-medium text-charcoal-900">NOVA Metro</p>
+                <p className="text-xs text-charcoal-800/60">From ₹4,499</p>
               </div>
             </div>
           </div>

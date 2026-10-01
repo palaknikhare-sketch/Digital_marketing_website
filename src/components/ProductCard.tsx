@@ -14,6 +14,7 @@ export function ProductCard({ product, onView }: ProductCardProps) {
   const wished = isWishlisted(product.id);
   const defaultColor = COLORS[product.defaultColor];
   const mainImage = product.featuredImage;
+  const hoverImage = product.gallery[product.defaultColor]?.side ?? product.featuredImage;
 
   return (
     <div className="group flex flex-col">
@@ -22,7 +23,13 @@ export function ProductCard({ product, onView }: ProductCardProps) {
           <img
             src={mainImage}
             alt={product.name}
-            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+            className="absolute inset-0 h-full w-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:opacity-0"
+            loading="lazy"
+          />
+          <img
+            src={hoverImage}
+            alt={`${product.name} alternate view`}
+            className="absolute inset-0 h-full w-full object-cover opacity-0 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100"
             loading="lazy"
           />
         </div>
