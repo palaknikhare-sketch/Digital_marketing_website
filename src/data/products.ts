@@ -606,11 +606,11 @@ export const PRODUCTS: Product[] = [
     reviews: 124,
     colors: ['midnight', 'navy', 'charcoal', 'stone'],
     defaultColor: 'midnight',
-    featuredImage: '/images/metro-main.jpg',
+    featuredImage: '/src/assets/images/products/01-metro.jpg',
     dimensions: '15.6-inch laptop compartment',
     features: ['USB Port', 'Laptop 15.6"', 'Water Repellent'],
     gallery: {
-      midnight: { front: '/images/metro-main.jpg', side: '/images/metro-sub1.jpg', back: '/images/metro-sub2.jpg', inside: '/images/metro-sub3.jpg', lifestyle: '/images/metro-sub4.jpg', detail: '/images/metro-sub5.jpg' },
+      midnight: { front: '/src/assets/images/products/01-metro.jpg', side: '/src/assets/images/products/01-metro.jpg', back: '/src/assets/images/products/01-metro.jpg', inside: '/src/assets/images/products/01-metro.jpg', lifestyle: '/src/assets/images/products/01-metro.jpg', detail: '/src/assets/images/products/01-metro.jpg' },
     },
   },
   {
@@ -624,11 +624,11 @@ export const PRODUCTS: Product[] = [
     reviews: 98,
     colors: ['navy', 'charcoal', 'brown'],
     defaultColor: 'navy',
-    featuredImage: '/images/executive-main.jpg',
+    featuredImage: '/src/assets/images/products/02-executive.jpg',
     dimensions: '17-inch laptop compartment',
     features: ['USB Port', 'Laptop 17"', 'Anti-Theft'],
     gallery: {
-      navy: { front: '/images/executive-main.jpg', side: '/images/executive-sub1.jpg', back: '/images/executive-sub2.jpg', inside: '/images/executive-sub3.jpg', lifestyle: '/images/executive-sub4.jpg', detail: '/images/executive-sub5.jpg' },
+      navy: { front: '/src/assets/images/products/02-executive.jpg', side: '/src/assets/images/products/02-executive.jpg', back: '/src/assets/images/products/02-executive.jpg', inside: '/src/assets/images/products/02-executive.jpg', lifestyle: '/src/assets/images/products/02-executive.jpg', detail: '/src/assets/images/products/02-executive.jpg' },
     },
   },
   {
@@ -642,11 +642,11 @@ export const PRODUCTS: Product[] = [
     reviews: 87,
     colors: ['charcoal', 'stone', 'taupe'],
     defaultColor: 'charcoal',
-    featuredImage: '/images/slate-main.jpg',
+    featuredImage: '/src/assets/images/products/03-slate.jpg',
     dimensions: '15.6-inch laptop compartment',
     features: ['Laptop 15.6"', 'Water Repellent', 'RFID Pocket'],
     gallery: {
-      charcoal: { front: '/images/slate-main.jpg', side: '/images/slate-sub1.jpg', back: '/images/slate-sub2.jpg', inside: '/images/slate-sub3.jpg', lifestyle: '/images/slate-sub4.jpg', detail: '/images/slate-sub5.jpg' },
+      charcoal: { front: '/src/assets/images/products/03-slate.jpg', side: '/src/assets/images/products/03-slate.jpg', back: '/src/assets/images/products/03-slate.jpg', inside: '/src/assets/images/products/03-slate.jpg', lifestyle: '/src/assets/images/products/03-slate.jpg', detail: '/src/assets/images/products/03-slate.jpg' },
     },
   },
   {
@@ -660,11 +660,11 @@ export const PRODUCTS: Product[] = [
     reviews: 110,
     colors: ['olive', 'charcoal', 'stone'],
     defaultColor: 'olive',
-    featuredImage: '/images/verge-main.jpg',
+    featuredImage: '/src/assets/images/products/04-verge.jpg',
     dimensions: '15.6-inch laptop compartment',
     features: ['USB Port', 'Laptop 15.6"', 'Anti-Theft'],
     gallery: {
-      olive: { front: '/images/verge-main.jpg', side: '/images/verge-sub1.jpg', back: '/images/verge-sub2.jpg', inside: '/images/verge-sub3.jpg', lifestyle: '/images/verge-sub4.jpg', detail: '/images/verge-sub5.jpg' },
+      olive: { front: '/src/assets/images/products/04-verge.jpg', side: '/src/assets/images/products/04-verge.jpg', back: '/src/assets/images/products/04-verge.jpg', inside: '/src/assets/images/products/04-verge.jpg', lifestyle: '/src/assets/images/products/04-verge.jpg', detail: '/src/assets/images/products/04-verge.jpg' },
     },
   },
   {
@@ -678,11 +678,11 @@ export const PRODUCTS: Product[] = [
     reviews: 76,
     colors: ['taupe', 'navy', 'charcoal', 'stone'],
     defaultColor: 'taupe',
-    featuredImage: '/images/apex-main.jpg',
+    featuredImage: '/src/assets/images/products/05-apex.jpg',
     dimensions: '15.6-inch laptop compartment',
     features: ['USB Port', 'Laptop 15.6"', 'Water Repellent'],
     gallery: {
-      taupe: { front: '/images/apex-main.jpg', side: '/images/apex-sub1.jpg', back: '/images/apex-sub2.jpg', inside: '/images/apex-sub3.jpg', lifestyle: '/images/apex-sub4.jpg', detail: '/images/apex-sub5.jpg' },
+      taupe: { front: '/src/assets/images/products/05-apex.jpg', side: '/src/assets/images/products/05-apex.jpg', back: '/src/assets/images/products/05-apex.jpg', inside: '/src/assets/images/products/05-apex.jpg', lifestyle: '/src/assets/images/products/05-apex.jpg', detail: '/src/assets/images/products/05-apex.jpg' },
     },
   },
   {
